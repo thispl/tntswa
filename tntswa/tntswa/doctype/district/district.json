@@ -1,0 +1,94 @@
+{
+ "actions": [],
+ "allow_import": 1,
+ "allow_rename": 1,
+ "autoname": "field:district_in_tamil",
+ "creation": "2025-12-11 15:39:25.722300",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "section_break_1xm5",
+  "district_in_tamil",
+  "office_address",
+  "district",
+  "short_code",
+  "column_break_oe2e",
+  "office_bearer_details_section",
+  "office_bearer"
+ ],
+ "fields": [
+  {
+   "fieldname": "section_break_1xm5",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "district",
+   "fieldtype": "Data",
+   "hidden": 1,
+   "label": "District1",
+   "unique": 1
+  },
+  {
+   "depends_on": "eval:frappe.session.user == \"bhuvaneswari.a@groupteampro.com\"",
+   "fieldname": "short_code",
+   "fieldtype": "Data",
+   "label": "Short Code"
+  },
+  {
+   "fieldname": "district_in_tamil",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "District",
+   "reqd": 1,
+   "unique": 1
+  },
+  {
+   "fieldname": "office_bearer_details_section",
+   "fieldtype": "Section Break",
+   "label": "Office Bearer Details"
+  },
+  {
+   "fieldname": "office_bearer",
+   "fieldtype": "Table",
+   "label": "Office Bearer",
+   "options": "Office Bearer"
+  },
+  {
+   "fieldname": "column_break_oe2e",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "office_address",
+   "fieldtype": "Small Text",
+   "label": "Office Address"
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2025-12-23 14:27:55.861158",
+ "modified_by": "bhuvaneswari.a@groupteampro.com",
+ "module": "TNTSWA",
+ "name": "District",
+ "naming_rule": "By fieldname",
+ "owner": "bhuvaneswari.a@groupteampro.com",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
