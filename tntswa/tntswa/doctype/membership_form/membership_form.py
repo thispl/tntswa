@@ -11,7 +11,7 @@ class MembershipForm(Document):
 
 		last_id = frappe.db.get_value(
 			"Membership Form",
-			filters={"district_short_code": district_code},
+			filters={"district_short_code": district_code,'amended_from':["is", "not set"]},
 			fieldname="name",
 			order_by="creation desc"
 		)

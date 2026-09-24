@@ -7,9 +7,6 @@
 
     frappe.call({
             method: 'tntswa.tntswa.doctype.document_view.document_view.get_document_manager_data',
-            args:{
-                district:frm.doc.district
-            },
             callback: function(response) {
                 const documentManagerData = response.message;
 

@@ -144,7 +144,7 @@ def download_donation_pdf(district=None):
 
     # ---------- BASE64 WATERMARK IMAGE ----------
     logo_path = get_site_path(
-        "public", "files", "TNTSWA_LOGO1-removebg-preview.png"
+        "public", "files", "transparent-image (1).png"
     )
     with open(logo_path, "rb") as f:
         logo_base64 = base64.b64encode(f.read()).decode()
@@ -247,7 +247,7 @@ def download_donation_pdf(district=None):
             <div class="watermark"></div>
             <div class="content">
             <div>
-                <img src="/files/TNTSWA Header.jpeg" alt="TNTSWA Logo" width="700px">
+                <img src="/files/WhatsApp Image 2026-03-19 at 9.26.32 PM.jpeg" alt="TNTSWA Logo" width="700px">
            
         """
 

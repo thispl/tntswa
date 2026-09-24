@@ -9,25 +9,55 @@ class DocumentView(Document):
 	pass
 
 
+# @frappe.whitelist()
+# def get_document_manager_data():
+	
+# 	docs = frappe.get_single('Document Manager')
+	
+	
+# 	document_manager_data = []
+
+# 	for doc in docs.document_manager:  
+# 		document_manager_data.append({
+# 			'name':doc.name,
+# 			'document_title': doc.document_title,
+# 			'district': doc.district,
+# 			'document':doc.document
+			
+# 		})
+	
+	
+# 	return document_manager_data
+
+
+import frappe
+
 @frappe.whitelist()
 def get_document_manager_data():
-	
-	docs = frappe.get_single('Document Manager')
-	
-	
-	document_manager_data = []
+    user = frappe.session.user
+    user_district = frappe.db.get_value(
+        "User Permission",
+        {
+            "user": user,
+            "allow": "District"
+        },
+        "for_value"
+    )
 
-	for doc in docs.document_manager:  
-		document_manager_data.append({
-			'name':doc.name,
-			'document_title': doc.document_title,
-			'district': doc.district,
-			'document':doc.document
-			
-		})
-	
-	
-	return document_manager_data
+    filters = {}
+    if user_district:
+        filters["district"] = user_district
+
+    return frappe.get_all(
+        "Document Proof",  
+        fields=[
+            "name",
+            "document_title",
+            "district",
+            "document"
+        ],
+        filters=filters
+    )
 
 
 @frappe.whitelist()

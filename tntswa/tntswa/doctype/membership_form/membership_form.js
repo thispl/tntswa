@@ -3,7 +3,74 @@
 
 frappe.ui.form.on("Membership Form", {
     refresh: function(frm) {
+        frm.set_df_property("shop_place", "label", "ஊர்");
+        frm.set_df_property("taluk", "label", "தாலுகா");
         fix_signature_width(frm);
+        let allowed_users = [
+            "statecenter1@tntswa.com",
+            "statecenter2@tntswa.com",
+            "statecenter3@tntswa.com",
+            "statecenter4@tntswa.com",
+            "statecenter5@tntswa.com",
+            "statecenter6@tntswa.com",
+            "bhuvaneswari.a@groupteampro.com"
+            
+        ];
+
+        // Field name example: special_field
+        if (allowed_users.includes(frappe.session.user)) {
+            frm.set_df_property("add_sign", "hidden", 0);
+            frm.set_df_property("add_president_sign", "hidden", 0);
+        } else {
+            frm.set_df_property("add_sign", "hidden", 1);
+            frm.set_df_property("add_president_sign", "hidden", 1);
+        }
+        if(!frm.doc.__islocal && frm.doc.workflow_state == "Pending for State General Manager" && allowed_users.includes(frappe.session.user)){
+            frm.add_custom_button(__('Add Signature'), () => {
+
+                let general_img = "/files/State General.png";
+
+                // State General signature
+                fetch(general_img)
+                    .then(res => res.blob())
+                    .then(blob => {
+                        let reader = new FileReader();
+                        reader.onloadend = function () {
+
+                            frm.set_value('state_general_manager_sign', reader.result);
+                            frm.set_value('state_general', general_img);
+
+                            frm.save();
+
+                            // State President signature
+                        };
+                        reader.readAsDataURL(blob);
+                    });
+
+            });
+        }
+        if(!frm.doc.__islocal && frm.doc.workflow_state == "Pending for State President" && allowed_users.includes(frappe.session.user)){
+            frm.add_custom_button(__('Add Signature'), () => {
+
+                let president_img = "/files/State Manager.png";
+
+                // State General signature
+                fetch(president_img)
+                .then(res => res.blob())
+                .then(blob2 => {
+                    let reader2 = new FileReader();
+                    reader2.onloadend = function () {
+
+                        frm.set_value('state_president_signature', reader2.result);
+                        frm.set_value('state_president', president_img);
+
+                        frm.save();
+                    };
+                    reader2.readAsDataURL(blob2);
+                });
+
+            });
+        }
         if(!frm.doc.__islocal && frm.doc.docstatus!=2){
 	        frm.add_custom_button(__("Membership Form"), function () {
 			var f_name = frm.doc.name
@@ -41,22 +108,80 @@ frappe.ui.form.on("Membership Form", {
 
         },__('Actions'));
         }
-        frappe.db.get_value("User", { "name": user }, "language")
-        .then(function(r) {
-            var lang = r.message.language;
-            if (lang === "ta") {
-                frm.set_df_property("date_of_joining", "label", "பணியில் சேர்ந்த நாள்");
-
-            }
-        });
+        
         
 
        
     },
-    after_save(frm){
-        frm.trigger("refresh");
+    // after_save: function(frm) {
+    //     frm.refresh_field("sign");
+
+    //     setTimeout(() => {
+    //         fix_signature_width(frm);
+    //     }, 300);
+    // },
+    add_sign: function(frm){
+        let general_img = "/files/State General.png";
+
+        // State General signature
+        fetch(general_img)
+            .then(res => res.blob())
+            .then(blob => {
+                let reader = new FileReader();
+                reader.onloadend = function () {
+
+                    frm.set_value('state_general_manager_sign', reader.result);
+                    frm.set_value('state_general', general_img);
+
+                    frm.save();
+
+                    // State President signature
+                };
+                reader.readAsDataURL(blob);
+            });
 
     },
+    add_sign: function(frm){
+        let general_img = "/files/State General.png";
+
+        // State General signature
+        fetch(general_img)
+            .then(res => res.blob())
+            .then(blob => {
+                let reader = new FileReader();
+                reader.onloadend = function () {
+
+                    frm.set_value('state_general_manager_sign', reader.result);
+                    frm.set_value('state_general', general_img);
+
+                    frm.save();
+
+                    // State President signature
+                };
+                reader.readAsDataURL(blob);
+            });
+
+    },
+    add_president_sign: function(frm){
+            let president_img = "/files/State Manager.png";
+
+                // State General signature
+                fetch(president_img)
+                .then(res => res.blob())
+                .then(blob2 => {
+                    let reader2 = new FileReader();
+                    reader2.onloadend = function () {
+
+                        frm.set_value('state_president_signature', reader2.result);
+                        frm.set_value('state_president', president_img);
+
+                        frm.save();
+                    };
+                    reader2.readAsDataURL(blob2);
+                });
+    },
+
+
     date_of_birth: function(frm) {
         if (frm.doc.date_of_birth) {
             let dob = new Date(frm.doc.date_of_birth);
@@ -77,21 +202,69 @@ frappe.ui.form.on("Membership Form", {
             frm.set_value("whatsapp_no", "");
         }
     },
-    after_save(frm){
-        if(frm.doc.sign){
-            frm.set_df_property("sign","read_only","1")
-        }
-    },
-    
 
+//     signature: function(frm) {
+
+//     let sign_img = frm.doc.signature;
+
+//     if (sign_img) {
+
+//         fetch(sign_img)
+//             .then(res => res.blob())
+//             .then(blob => {
+
+//                 let reader = new FileReader();
+
+//                 reader.onloadend = function () {
+
+//                     frm.set_value("sign", reader.result);
+
+//                     frm.refresh_field("sign");
+
+//                     frm.dirty = false;
+//                 };
+
+//                 reader.readAsDataURL(blob);
+//             });
+//     }
+// }
+        signature: function(frm) {
+
+            let sign_img = frm.doc.signature;
+
+            if (sign_img) {
+
+                fetch(sign_img)
+                    .then(res => res.blob())
+                    .then(blob => {
+
+                        let reader = new FileReader();
+
+                        reader.onloadend = async function () {
+
+                            await frm.set_value(
+                                "sign",
+                                reader.result
+                            );
+
+                            frm.refresh_field("sign");
+
+                            await frm.save();
+                        };
+
+                        reader.readAsDataURL(blob);
+                    });
+            }
+        },
  
 });
+
 
 function fix_signature_width(frm) {
 
     let signature_fields = [
         "state_president_signature",
-        "sign" ,  // 2nd field name
+        "sign",
         "state_general_manager_sign"
     ];
 
@@ -105,12 +278,11 @@ function fix_signature_width(frm) {
             if (canvas.length) {
                 let width = wrapper.width();
 
-                canvas.attr("width", width);
                 canvas.css({
                     width: width + "px",
                     maxWidth: "100%"
                 });
             }
-        }, 600);
+        }, 300);
     });
 }

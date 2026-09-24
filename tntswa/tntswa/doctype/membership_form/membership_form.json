@@ -13,11 +13,11 @@
   "district_name",
   "pincode",
   "full_address__permanent_address",
+  "column_break_8in0",
   "image",
-  "column_break_hllq",
-  "sign",
-  "state_president_signature",
-  "state_general_manager_sign",
+  "signature",
+  "state_general",
+  "state_president",
   "section_break_nwtz",
   "educational_qualification",
   "job_description",
@@ -31,10 +31,18 @@
   "phone_no",
   "is_same_as_phone_no",
   "whatsapp_no",
+  "aadhar_no",
   "column_break_tzbk",
   "shop_no",
-  "aadhar_no",
+  "shop_place",
+  "taluk",
   "identity_mark",
+  "sign",
+  "check_sign",
+  "add_sign",
+  "state_general_manager_sign",
+  "add_president_sign",
+  "state_president_signature",
   "amended_from"
  ],
  "fields": [
@@ -44,6 +52,7 @@
    "in_list_view": 1,
    "in_standard_filter": 1,
    "label": "Name",
+   "no_copy": 1,
    "reqd": 1
   },
   {
@@ -52,6 +61,7 @@
    "label": "Father Name"
   },
   {
+   "allow_on_submit": 1,
    "fieldname": "district_name",
    "fieldtype": "Link",
    "in_list_view": 1,
@@ -107,6 +117,7 @@
    "fieldtype": "Data",
    "in_list_view": 1,
    "label": "Phone No",
+   "no_copy": 1,
    "reqd": 1
   },
   {
@@ -128,12 +139,9 @@
    "fieldname": "aadhar_no",
    "fieldtype": "Data",
    "label": "Aadhar No",
+   "no_copy": 1,
    "reqd": 1,
    "unique": 1
-  },
-  {
-   "fieldname": "column_break_hllq",
-   "fieldtype": "Column Break"
   },
   {
    "fieldname": "section_break_nwtz",
@@ -182,12 +190,18 @@
   {
    "fieldname": "sign",
    "fieldtype": "Signature",
-   "label": "Member's Signature"
+   "label": "Member's Signature",
+   "no_copy": 1,
+   "read_only_depends_on": "eval:doc.check_sign == 1"
   },
   {
+   "allow_on_submit": 1,
+   "depends_on": "eval:doc.workflow_state == \"Pending for State President\" || doc.workflow_state==\"Approved\" || doc.workflow_state == \"Rejected\"",
    "fieldname": "state_president_signature",
    "fieldtype": "Signature",
-   "label": "State President Signature"
+   "label": "State President Signature",
+   "no_copy": 1,
+   "read_only": 1
   },
   {
    "fieldname": "identity_mark",
@@ -205,9 +219,65 @@
    "search_index": 1
   },
   {
+   "allow_on_submit": 1,
+   "depends_on": "eval:doc.workflow_state == \"Pending for State General Manager\" || doc.workflow_state==\"Approved\" || doc.workflow_state == \"Rejected\" || doc.workflow_state==\"Pending for State President\"",
    "fieldname": "state_general_manager_sign",
    "fieldtype": "Signature",
-   "label": "State General Manager Sign"
+   "label": "State General Manager Sign",
+   "no_copy": 1,
+   "read_only": 1
+  },
+  {
+   "fieldname": "state_general",
+   "fieldtype": "Attach",
+   "hidden": 1,
+   "label": "State General"
+  },
+  {
+   "allow_on_submit": 1,
+   "fieldname": "state_president",
+   "fieldtype": "Attach",
+   "hidden": 1,
+   "label": "State President"
+  },
+  {
+   "default": "0",
+   "fieldname": "check_sign",
+   "fieldtype": "Check",
+   "label": "Check Sign"
+  },
+  {
+   "fieldname": "shop_place",
+   "fieldtype": "Data",
+   "label": "Shop Place "
+  },
+  {
+   "fieldname": "taluk",
+   "fieldtype": "Data",
+   "label": "Taluk"
+  },
+  {
+   "fieldname": "signature",
+   "fieldtype": "Attach",
+   "label": "Signature"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.workflow_state == \"Pending for State General Manager\" || doc.workflow_state==\"Approved\" || doc.workflow_state == \"Rejected\" || doc.workflow_state==\"Pending for State President\"",
+   "fieldname": "add_sign",
+   "fieldtype": "Check",
+   "label": "Add Manager Sign"
+  },
+  {
+   "default": "0",
+   "depends_on": "eval:doc.workflow_state == \"Pending for State President\" || doc.workflow_state==\"Approved\" || doc.workflow_state == \"Rejected\"",
+   "fieldname": "add_president_sign",
+   "fieldtype": "Check",
+   "label": "Add President Sign"
+  },
+  {
+   "fieldname": "column_break_8in0",
+   "fieldtype": "Column Break"
   }
  ],
  "grid_page_length": 50,
@@ -215,7 +285,7 @@
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-12-26 15:14:41.030924",
+ "modified": "2026-05-09 17:56:53.992970",
  "modified_by": "bhuvaneswari.a@groupteampro.com",
  "module": "TNTSWA",
  "name": "Membership Form",
@@ -240,5 +310,6 @@
  "rows_threshold_for_grid_search": 20,
  "sort_field": "modified",
  "sort_order": "DESC",
- "states": []
+ "states": [],
+ "title_field": "name1"
 }

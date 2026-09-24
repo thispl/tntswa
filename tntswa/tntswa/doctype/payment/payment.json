@@ -20,11 +20,13 @@
   "section_break_znwu",
   "type_of_payment",
   "amount",
+  "add_district_in_charge_sign",
   "district_in_charge_signature",
   "column_break_gtu8",
   "month",
   "year",
   "amount_in_words",
+  "add_state_in_charge_sign",
   "state_in_charge_signature"
  ],
  "fields": [
@@ -77,7 +79,7 @@
    "fieldtype": "Select",
    "label": "Type of Payment",
    "mandatory_depends_on": "eval:doc.payment_type == \"\u0bb5\u0bb0\u0bb5\u0bc1\"",
-   "options": "\n\u0bae\u0bbe\u0ba4\u0bbe\u0ba8\u0bcd\u0ba4\u0bbf\u0bb0 \u0baa\u0b99\u0bcd\u0b95\u0bb3\u0bbf\u0baa\u0bcd\u0baa\u0bc1\u0b95\u0bb3\u0bcd\n\u0ba8\u0ba9\u0bcd\u0b95\u0bca\u0b9f\u0bc8\u0b95\u0bb3\u0bcd"
+   "options": "\n\u0bae\u0bbe\u0ba4\u0bbe\u0ba8\u0bcd\u0ba4\u0bbf\u0bb0 \u0b9a\u0ba8\u0bcd\u0ba4\u0bbe\n\u0bb5\u0bb0\u0bc1\u0b9f\u0bbe\u0ba8\u0bcd\u0ba4\u0bbf\u0bb0 \u0b9a\u0ba8\u0bcd\u0ba4\u0bbe\n\u0ba8\u0ba9\u0bcd\u0b95\u0bca\u0b9f\u0bc8\u0b95\u0bb3\u0bcd"
   },
   {
    "depends_on": "eval:doc.payment_type == \"\u0b9a\u0bc6\u0bb2\u0bb5\u0bc1\" || doc.payment_type ==\"\u0bb5\u0bb0\u0bb5\u0bc1\"  && doc.payment_from",
@@ -87,19 +89,19 @@
    "reqd": 1
   },
   {
-   "depends_on": "eval:doc.type_of_payment == \"\u0bae\u0bbe\u0ba4\u0bbe\u0ba8\u0bcd\u0ba4\u0bbf\u0bb0 \u0baa\u0b99\u0bcd\u0b95\u0bb3\u0bbf\u0baa\u0bcd\u0baa\u0bc1\u0b95\u0bb3\u0bcd\"",
+   "depends_on": "eval:doc.type_of_payment == \"\u0bae\u0bbe\u0ba4\u0bbe\u0ba8\u0bcd\u0ba4\u0bbf\u0bb0 \u0b9a\u0ba8\u0bcd\u0ba4\u0bbe\"",
    "fieldname": "month",
    "fieldtype": "Select",
    "label": "Month",
-   "mandatory_depends_on": "eval:doc.type_of_payment == \"\u0bae\u0bbe\u0ba4\u0bbe\u0ba8\u0bcd\u0ba4\u0bbf\u0bb0 \u0baa\u0b99\u0bcd\u0b95\u0bb3\u0bbf\u0baa\u0bcd\u0baa\u0bc1\u0b95\u0bb3\u0bcd\"",
+   "mandatory_depends_on": "eval:doc.type_of_payment == \"\u0bae\u0bbe\u0ba4\u0bbe\u0ba8\u0bcd\u0ba4\u0bbf\u0bb0 \u0b9a\u0ba8\u0bcd\u0ba4\u0bbe\"",
    "options": "\n\u0b9c\u0ba9\u0bb5\u0bb0\u0bbf\n\u0baa\u0bbf\u0baa\u0bcd\u0bb0\u0bb5\u0bb0\u0bbf\n\u0bae\u0bbe\u0bb0\u0bcd\u0b9a\u0bcd\n\u0b8f\u0baa\u0bcd\u0bb0\u0bb2\u0bcd\n\u0bae\u0bc7\n\u0b9c\u0bc2\u0ba9\u0bcd\n\u0b9c\u0bc2\u0bb2\u0bc8\n\u0b86\u0b95\u0bb8\u0bcd\u0b9f\u0bcd\n\u0b9a\u0bc6\u0baa\u0bcd\u0b9f\u0bae\u0bcd\u0baa\u0bb0\u0bcd\n\u0b85\u0b95\u0bcd\u0b9f\u0bcb\u0baa\u0bb0\u0bcd\n\u0ba8\u0bb5\u0bae\u0bcd\u0baa\u0bb0\u0bcd\n\u0b9f\u0bbf\u0b9a\u0bae\u0bcd\u0baa\u0bb0\u0bcd"
   },
   {
-   "depends_on": "eval:doc.type_of_payment == \"\u0bae\u0bbe\u0ba4\u0bbe\u0ba8\u0bcd\u0ba4\u0bbf\u0bb0 \u0baa\u0b99\u0bcd\u0b95\u0bb3\u0bbf\u0baa\u0bcd\u0baa\u0bc1\u0b95\u0bb3\u0bcd\"",
+   "depends_on": "eval:doc.type_of_payment == \"\u0bae\u0bbe\u0ba4\u0bbe\u0ba8\u0bcd\u0ba4\u0bbf\u0bb0 \u0b9a\u0ba8\u0bcd\u0ba4\u0bbe\" || doc.type_of_payment ==\"\u0bb5\u0bb0\u0bc1\u0b9f\u0bbe\u0ba8\u0bcd\u0ba4\u0bbf\u0bb0 \u0b9a\u0ba8\u0bcd\u0ba4\u0bbe\"",
    "fieldname": "year",
    "fieldtype": "Link",
    "label": "Year",
-   "mandatory_depends_on": "eval:doc.type_of_payment == \"\u0bae\u0bbe\u0ba4\u0bbe\u0ba8\u0bcd\u0ba4\u0bbf\u0bb0 \u0baa\u0b99\u0bcd\u0b95\u0bb3\u0bbf\u0baa\u0bcd\u0baa\u0bc1\u0b95\u0bb3\u0bcd\"",
+   "mandatory_depends_on": "eval:doc.type_of_payment == \"\u0bae\u0bbe\u0ba4\u0bbe\u0ba8\u0bcd\u0ba4\u0bbf\u0bb0 \u0b9a\u0ba8\u0bcd\u0ba4\u0bbe\" || doc.type_of_payment ==\"\u0bb5\u0bb0\u0bc1\u0b9f\u0bbe\u0ba8\u0bcd\u0ba4\u0bbf\u0bb0 \u0b9a\u0ba8\u0bcd\u0ba4\u0bbe\"",
    "options": "Year"
   },
   {
@@ -169,13 +171,23 @@
    "fieldname": "state_in_charge_signature",
    "fieldtype": "Signature",
    "label": "State In Charge Signature"
+  },
+  {
+   "fieldname": "add_district_in_charge_sign",
+   "fieldtype": "Attach",
+   "label": "Add District In Charge Sign"
+  },
+  {
+   "fieldname": "add_state_in_charge_sign",
+   "fieldtype": "Attach",
+   "label": "Add State in Charge Sign"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-12-26 15:22:46.652546",
+ "modified": "2026-05-09 17:05:28.304543",
  "modified_by": "bhuvaneswari.a@groupteampro.com",
  "module": "TNTSWA",
  "name": "Payment",

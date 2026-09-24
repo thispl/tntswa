@@ -14,7 +14,9 @@
   "short_code",
   "column_break_oe2e",
   "office_bearer_details_section",
-  "office_bearer"
+  "office_bearer",
+  "section_break_zhnr",
+  "document_manager"
  ],
  "fields": [
   {
@@ -25,8 +27,7 @@
    "fieldname": "district",
    "fieldtype": "Data",
    "hidden": 1,
-   "label": "District1",
-   "unique": 1
+   "label": "District1"
   },
   {
    "depends_on": "eval:frappe.session.user == \"bhuvaneswari.a@groupteampro.com\"",
@@ -61,12 +62,22 @@
    "fieldname": "office_address",
    "fieldtype": "Small Text",
    "label": "Office Address"
+  },
+  {
+   "fieldname": "section_break_zhnr",
+   "fieldtype": "Section Break"
+  },
+  {
+   "fieldname": "document_manager",
+   "fieldtype": "Table",
+   "label": "Document Manager",
+   "options": "Document Manager Proof"
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2025-12-23 14:27:55.861158",
+ "modified": "2026-01-03 11:27:03.861014",
  "modified_by": "bhuvaneswari.a@groupteampro.com",
  "module": "TNTSWA",
  "name": "District",
